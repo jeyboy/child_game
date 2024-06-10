@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My Website</title>
+    <!-- <link rel="stylesheet" href="./style.css"> -->
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+
+    <style>
+        #board {
+            width: 100%;
+            height: 80vh;
+
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(4, 1fr);
+
+            .board-itm {
+                box-sizing: border-box;
+                border: 1px solid #000;
+                min-height: 60px;
+                touch-action: none;
+                user-select: none;
+
+                img {
+                    object-fit: contain;
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+
+            .deleted.board-itm {
+                min-height: 60px;
+
+                img {
+                    display: none;
+                }
+            }
+        }
+
+        /* .drag-drop {
+            display: inline-block;
+
+
+            touch-action: none;
+            transform: translate(0px, 0px);
+
+            transition: background-color 0.3s;
+        } */
+
+        .drop-active {
+            border-color: #aaa;
+        }
+
+        .drop-target {
+            background-color: #29e;
+            border-color: #fff;
+            border-style: solid;
+        }
+
+        .can-drop {
+            color: #000;
+            opacity: 0.5;
+            /* background-color: #4e4; */
+        }
+
+        .blurred {
+            -webkit-filter: blur(50px);
+            -moz-filter: blur(50px);
+            -o-filter: blur(50px);
+            -ms-filter: blur(50px);
+            filter: blur(50px);
+        }
+
+    </style>
+  </head>
+  <body>
+    <main>
+        <h1>
+            Child Game
+            <span>
+                <a href="javascript: window.resetState();">Reset</a>
+            </span>
+        </h1>
+
+        <div id="board" class="blurred">
+            <div class="board-itm dropzone draggable" data-uid="1"><img src="imgs/1.png"/></div>
+            <div class="board-itm dropzone draggable" data-uid="2"><img src="imgs/2.png"/></div>
+            <div class="board-itm dropzone draggable" data-uid="3"><img src="imgs/3.png"/></div>
+            <div class="board-itm dropzone draggable" data-uid="4"><img src="imgs/4.png"/></div>
+            <div class="board-itm dropzone draggable" data-uid="5"><img src="imgs/5.png"/></div>
+            <div class="board-itm dropzone draggable" data-uid="6"><img src="imgs/6.png"/></div>
+            <div class="board-itm dropzone draggable" data-uid="7"><img src="imgs/7.png"/></div>
+            <div class="board-itm dropzone draggable" data-uid="8"><img src="imgs/8.png"/></div>
+            <div class="board-itm dropzone draggable" data-uid="1"><img src="imgs/1.png"/></div>
+            <div class="board-itm dropzone draggable" data-uid="2"><img src="imgs/2.png"/></div>
+            <div class="board-itm dropzone draggable" data-uid="3"><img src="imgs/3.png"/></div>
+            <div class="board-itm dropzone draggable" data-uid="4"><img src="imgs/4.png"/></div>
+            <div class="board-itm dropzone draggable" data-uid="5"><img src="imgs/5.png"/></div>
+            <div class="board-itm dropzone draggable" data-uid="6"><img src="imgs/6.png"/></div>
+            <div class="board-itm dropzone draggable" data-uid="7"><img src="imgs/7.png"/></div>
+            <div class="board-itm dropzone draggable" data-uid="8"><img src="imgs/8.png"/></div>
+        </div>
+    </main>
+
+    <script src="interact.min.js"></script>
+    <script type="module">
+        window.resetState = function() {
+            const arr = [1,2,3,4,5,6,7,8];
+
+
+            const procArr = 
+                [...arr, ...arr]
+                    .map(value => ({ value, sort: Math.random() }))
+                    .sort((a, b) => a.sort - b.sort)
+                    .map(({ value }) => value);
+
+
+            const elems = document.getElementsByClassName('board-itm');
+
+            for(let i = 0; i < elems.length; i++) {
+                const elem = elems[i];
+                const uid = procArr.shift();
+
+                elem.dataset.uid = uid;
+                const imgNode = elem.querySelector('img');
+                imgNode.src = `imgs/${uid}.png`;
+            } 
+        }
+
+        window.onload = function() {
+            window.resetState();
+
+            document.getElementById('board').classList.remove('blurred');
+        }
+
+
+        function dragMoveListener (event) {
+            var target = event.target
+            // keep the dragged position in the data-x/data-y attributes
+            var x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx
+            var y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy
+
+            // translate the element
+            target.style.transform = 'translate(' + x + 'px, ' + y + 'px)'
+
+            // update the posiion attributes
+            target.setAttribute('data-x', x)
+            target.setAttribute('data-y', y)
+        }
+    
+
+        interact('.draggable').draggable({
+            inertia: true,
+            modifiers: [
+            interact.modifiers.restrictRect({
+                restriction: 'parent',
+                endOnly: true
+            })
+            ],
+            autoScroll: true,
+            // dragMoveListener from the dragging demo above
+            listeners: { 
+                start: function(event) { event.target.classList.remove('droped'); },
+                end: function(event) {
+                    event.target.classList.remove('can-drop');
+
+                    if (!event.target.classList.contains('droped')) {
+                        event.target.removeAttribute("data-x");
+                        event.target.removeAttribute("data-y");
+                        event.target.style.transform = "translate(0px, 0px)";
+                    }
+                    //  console.log('dropped', event)
+                },
+                move: dragMoveListener 
+            }
+        });
+
+        interact('.dropzone').dropzone({
+            // only accept elements matching this CSS selector
+            accept: '.board-itm',
+            // Require a 50% element overlap for a drop to be possible
+            overlap: 0.5,
+
+            // listen for drop related events:
+
+            ondropactivate: function (event) {
+                // add active dropzone feedback
+                event.target.classList.add('drop-active')
+            },
+            ondragenter: function (event) {
+                var draggableElement = event.relatedTarget
+                var dropzoneElement = event.target
+
+                // feedback the possibility of a drop
+                dropzoneElement.classList.add('drop-target')
+                draggableElement.classList.add('can-drop')
+                // draggableElement.textContent = 'Dragged in'
+            },
+            ondragleave: function (event) {
+                // remove the drop feedback style
+                event.target.classList.remove('drop-target')
+                event.relatedTarget.classList.remove('can-drop')
+                // event.relatedTarget.textContent = 'Dragged out'
+            },
+            ondrop: function (event) {
+                const uid1 = event.target.dataset.uid;
+                const uid2 = event.relatedTarget.dataset.uid;
+
+                if (uid1 === uid2) {
+                    // event.relatedTarget.classList.add('droped');
+
+                    event.target.classList.remove('draggable');
+                    event.relatedTarget.classList.remove('draggable');
+
+                    event.target.classList.add('deleted');
+                    event.relatedTarget.classList.add('deleted');
+                    // event.relatedTarget.style.display = 'none';
+                }
+            },
+            ondropdeactivate: function (event) {
+                // remove active dropzone feedback
+                event.target.classList.remove('drop-active')
+                event.target.classList.remove('drop-target')
+            }
+        })
+    </script>
+
+  </body>
+</html>
