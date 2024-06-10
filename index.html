@@ -124,6 +124,7 @@
                 const elem = elems[i];
                 const uid = procArr.shift();
 
+                elem.classList.remove('deleted');
                 elem.dataset.uid = uid;
                 const imgNode = elem.querySelector('img');
                 imgNode.src = `imgs/${uid}.png`;
