@@ -86,45 +86,104 @@
   </head>
   <body>
     <main>
-        <h1>
-            Child Game
-            <span>
-                <a href="javascript: window.resetState();">Reset</a>
-            </span>
-        </h1>
-
         <div id="win_screen" class="hide">
-            <h2>Ты справился! Молодец!!!</h2>
+            <h2>
+                Ты справился! Молодец!!!
+                <span>
+                    <a href="javascript: window.resetState();">Reset</a>
+                </span>
+            </h2>
             <canvas id="fireworks"></canvas>
         </div>
 
-        <div id="board" class="blurred">
-            <div class="board-itm dropzone draggable" data-uid="1"><img src="imgs/1.png"/></div>
-            <div class="board-itm dropzone draggable" data-uid="2"><img src="imgs/2.png"/></div>
-            <div class="board-itm dropzone draggable" data-uid="3"><img src="imgs/3.png"/></div>
-            <div class="board-itm dropzone draggable" data-uid="4"><img src="imgs/4.png"/></div>
-            <div class="board-itm dropzone draggable" data-uid="5"><img src="imgs/5.png"/></div>
-            <div class="board-itm dropzone draggable" data-uid="6"><img src="imgs/6.png"/></div>
-            <div class="board-itm dropzone draggable" data-uid="7"><img src="imgs/7.png"/></div>
-            <div class="board-itm dropzone draggable" data-uid="8"><img src="imgs/8.png"/></div>
-            <div class="board-itm dropzone draggable" data-uid="1"><img src="imgs/1.png"/></div>
-            <div class="board-itm dropzone draggable" data-uid="2"><img src="imgs/2.png"/></div>
-            <div class="board-itm dropzone draggable" data-uid="3"><img src="imgs/3.png"/></div>
-            <div class="board-itm dropzone draggable" data-uid="4"><img src="imgs/4.png"/></div>
-            <div class="board-itm dropzone draggable" data-uid="5"><img src="imgs/5.png"/></div>
-            <div class="board-itm dropzone draggable" data-uid="6"><img src="imgs/6.png"/></div>
-            <div class="board-itm dropzone draggable" data-uid="7"><img src="imgs/7.png"/></div>
-            <div class="board-itm dropzone draggable" data-uid="8"><img src="imgs/8.png"/></div>
+        <div id="choose_game">
+            <h2>Выбери игру:</h2>
+            
+            <a href="javascript: window.switchGame(1);">Игра 1</a>
+            <a href="javascript: window.switchGame(2);">Игра 2</a>
+        </div>
+
+        <div id="game1" class="game hide">
+            <h1>
+                Child Game 1
+                <span>
+                    <a href="javascript: window.resetState();">Reset</a>
+                </span>
+            </h1>
+
+            <div id="board" class="blurred">
+                <div class="board-itm dropzone draggable" data-uid="1"><img src="imgs/1.png"/></div>
+                <div class="board-itm dropzone draggable" data-uid="2"><img src="imgs/2.png"/></div>
+                <div class="board-itm dropzone draggable" data-uid="3"><img src="imgs/3.png"/></div>
+                <div class="board-itm dropzone draggable" data-uid="4"><img src="imgs/4.png"/></div>
+                <div class="board-itm dropzone draggable" data-uid="5"><img src="imgs/5.png"/></div>
+                <div class="board-itm dropzone draggable" data-uid="6"><img src="imgs/6.png"/></div>
+                <div class="board-itm dropzone draggable" data-uid="7"><img src="imgs/7.png"/></div>
+                <div class="board-itm dropzone draggable" data-uid="8"><img src="imgs/8.png"/></div>
+                <div class="board-itm dropzone draggable" data-uid="1"><img src="imgs/1.png"/></div>
+                <div class="board-itm dropzone draggable" data-uid="2"><img src="imgs/2.png"/></div>
+                <div class="board-itm dropzone draggable" data-uid="3"><img src="imgs/3.png"/></div>
+                <div class="board-itm dropzone draggable" data-uid="4"><img src="imgs/4.png"/></div>
+                <div class="board-itm dropzone draggable" data-uid="5"><img src="imgs/5.png"/></div>
+                <div class="board-itm dropzone draggable" data-uid="6"><img src="imgs/6.png"/></div>
+                <div class="board-itm dropzone draggable" data-uid="7"><img src="imgs/7.png"/></div>
+                <div class="board-itm dropzone draggable" data-uid="8"><img src="imgs/8.png"/></div>
+            </div>
+        </div>
+
+
+        <div id="game2" class="game hide">
+            <h1>
+                Child Game 2
+                <span>
+                    <a href="javascript: window.resetState2();">Reset</a>
+                </span>
+            </h1>
+
+            <div id="board" class="blurred">
+                <div class="board-itm dropzone draggable" data-uid="1"><img src="imgs/1.png"/></div>
+                <div class="board-itm dropzone draggable" data-uid="2"><img src="imgs/2.png"/></div>
+                <div class="board-itm dropzone draggable" data-uid="3"><img src="imgs/3.png"/></div>
+                <div class="board-itm dropzone draggable" data-uid="4"><img src="imgs/4.png"/></div>
+                <div class="board-itm dropzone draggable" data-uid="5"><img src="imgs/5.png"/></div>
+                <div class="board-itm dropzone draggable" data-uid="6"><img src="imgs/6.png"/></div>
+                <div class="board-itm dropzone draggable" data-uid="7"><img src="imgs/7.png"/></div>
+                <div class="board-itm dropzone draggable" data-uid="8"><img src="imgs/8.png"/></div>
+                <div class="board-itm dropzone draggable" data-uid="1"><img src="imgs/1.png"/></div>
+                <div class="board-itm dropzone draggable" data-uid="2"><img src="imgs/2.png"/></div>
+                <div class="board-itm dropzone draggable" data-uid="3"><img src="imgs/3.png"/></div>
+                <div class="board-itm dropzone draggable" data-uid="4"><img src="imgs/4.png"/></div>
+                <div class="board-itm dropzone draggable" data-uid="5"><img src="imgs/5.png"/></div>
+                <div class="board-itm dropzone draggable" data-uid="6"><img src="imgs/6.png"/></div>
+                <div class="board-itm dropzone draggable" data-uid="7"><img src="imgs/7.png"/></div>
+                <div class="board-itm dropzone draggable" data-uid="8"><img src="imgs/8.png"/></div>
+            </div>
         </div>
     </main>
 
     <script src="interact.min.js"></script>
     <script src="firework.js"></script>
     <script type="module">
+        window.actSwitchGame = function(state) {
+            if (state) {
+                document.querySelectorAll('.game').forEach((game) => game.classList.add('hide') ); 
+                document.getElementById(`choose_game`).classList.remove('hide');
+            } else {
+                document.getElementById(`choose_game`).classList.add('hide');
+            }
+        }
+
+        window.switchGame = function(idx) {
+            document.querySelectorAll('.game').forEach((game) => game.classList.add('hide') ); 
+            document.getElementById(`game${idx}`).classList.remove('hide');
+
+            window.actSwitchGame(false);
+        }
+
         const firework = new Fireworks();
 
-        window.showWinScreen = function() {
-            const elems = document.getElementsByClassName('draggable');
+        window.showWinScreen1 = function() {
+            const elems = document.querySelectorAll('#game1 .draggable');
 
             if (!elems.length) {
                 const winScreen = document.getElementById('win_screen');
@@ -144,7 +203,36 @@
                     .map(({ value }) => value);
 
 
-            const elems = document.getElementsByClassName('board-itm');
+            const elems = document.querySelectorAll('#game1 .board-itm');
+
+            for(let i = 0; i < elems.length; i++) {
+                const elem = elems[i];
+                const uid = procArr.shift();
+
+                elem.classList.add('draggable');
+                elem.classList.remove('deleted');
+
+                elem.dataset.uid = uid;
+                const imgNode = elem.querySelector('img');
+                imgNode.src = `imgs/${uid}.png`;
+            }
+
+            const winScreen = document.getElementById('win_screen');
+            winScreen.classList.add('hide');
+            firework.stop();
+        }
+
+        window.resetState2 = function() {
+            const arr = [1,2,3,4,5,6,7,8];
+
+            const procArr = 
+                [...arr, ...arr]
+                    .map(value => ({ value, sort: Math.random() }))
+                    .sort((a, b) => a.sort - b.sort)
+                    .map(({ value }) => value);
+
+
+            const elems = document.querySelectorAll('#game2 .board-itm');
 
             for(let i = 0; i < elems.length; i++) {
                 const elem = elems[i];
@@ -252,7 +340,7 @@
                     event.relatedTarget.classList.add('deleted');
                     // event.relatedTarget.style.display = 'none';
 
-                    window.showWinScreen();
+                    window.showWinScreen1();
                 }
             },
             ondropdeactivate: function (event) {
